@@ -1,7 +1,5 @@
 import streamlit as st
 import requests
-import matplotlib.pyplot as plt
-import numpy as np
 import plotly.express as px
 
 # API URL
@@ -100,7 +98,7 @@ st.markdown("""
 st.title("📊 Customer Churn Predictor")
 st.markdown("""
     This application predicts whether a customer is likely to churn based on their details.
-    Fill in the form below and click **<span class="predict-link" onclick="document.getElementById('predict-button').click()">Predict Churn</span>** to see the result.
+    Fill in the form below and click **Predict Churn** to see the result.
 """, unsafe_allow_html=True)
 st.markdown("---")
 
@@ -184,33 +182,19 @@ if st.button("🔮 Predict Churn", key="predict-button"):
             st.success(f"Churn Probability: {churn_probability:.2f}")
             
             # Visualization
-            # labels = ["No Churn", "Churn"]
-            # values = [1 - churn_probability, churn_probability]
-            # fig, ax = plt.subplots(figsize=(4, 4))
-            # ax.pie(values, labels=labels, autopct='%1.1f%%', colors=['green', 'red'], startangle=90)
-            # ax.set_title("Churn Probability Distribution")
-            # st.pyplot(fig)
-            st.markdown("---")
-            fig = px.pie(
-                names=["No Churn", "Churn"],
-                values=[1 - churn_probability, churn_probability],
-                title="Churn Probability Distribution",
-                color=["No Churn", "Churn"],
-                color_discrete_map={"No Churn": "green", "Churn": "red"}
-            )
-            st.plotly_chart(fig, use_container_width=True)
+            if churn_probability is not None and 0 <= churn_probability <= 1:
+                fig = px.pie(
+                    names=["No Churn", "Churn"],
+                    values=[1 - churn_probability, churn_probability],
+                    title="Churn Probability Distribution",
+                    color=["No Churn", "Churn"],
+                    color_discrete_map={"No Churn": "green", "Churn": "red"}
+                )
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.warning("Invalid churn probability value. Unable to generate visualization.")
 
         except requests.exceptions.RequestException as e:
             st.error(f"API Request failed: {e}")
-
-# JavaScript to trigger the button click
-st.markdown(
-    """
-    <script>
-    function triggerButton() {
-        document.getElementById('predict-button').click();
-    }
-    </script>
-    """,
-    unsafe_allow_html=True,
-)
+        except Exception as e:
+            st.error(f"An unexpected error occurred: {e}")
