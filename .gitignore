@@ -1,0 +1,73 @@
+#############################
+# Python bytecode / cache   #
+#############################
+__pycache__/
+*.py[cod]
+*$py.class
+
+#############################
+# Environments              #
+#############################
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+.python-version
+
+#############################
+# Build / packaging         #
+#############################
+build/
+dist/
+*.egg-info/
+*.egg
+
+#############################
+# Jupyter / experiments     #
+#############################
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+#############################
+# IDE / editor              #
+#############################
+.vscode/
+.idea/
+*.code-workspace
+
+#############################
+# Testing / coverage        #
+#############################
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+#############################
+# Type checking / tooling   #
+#############################
+.mypy_cache/
+.ruff_cache/
+pyrightconfig.json
+
+#############################
+# OS-specific               #
+#############################
+.DS_Store
+Thumbs.db
+
+#############################
+# Logs / temp               #
+#############################
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+#############################
+# Miscellaneous            #
+#############################
+experiments/
