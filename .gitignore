@@ -15,6 +15,10 @@ ENV/
 .env
 .env.*
 .python-version
+
+#############################
+# Devcontainer              #
+#############################
 .devcontainer/
 
 
